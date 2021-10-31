@@ -2,11 +2,11 @@
 {{ config(materialized='table') }}
 
 select
-    encounter_id
-,   member_id
-,   encounter_start_date
-,   encounter_end_date
-,   admit_type_code
-,   admit_source_code
-,   discharge_status_code
+    cast(encounter_id as string) as encounter_id,
+    cast(member_id as string) as member_id,
+    to_date(encounter_start_date) as encounter_start_date,
+    to_date(encounter_end_date) as encounter_end_date,
+    cast(admit_type_code as integer) as admit_type_code,
+    cast(admit_source_code as integer) as admit_source_code,
+    cast(discharge_status_code as integer) as discharge_status_code
 from hcup.public.encounters

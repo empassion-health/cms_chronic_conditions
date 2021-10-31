@@ -1,0 +1,34 @@
+version: 2
+
+models:
+    - name: stg_diagnoses
+      description: >
+        A table of all present diagnosis codes for all members.
+
+
+      columns:
+          - name: encounter_id
+            description: >
+              The encounter_id corresponding to the encounter where this
+              diagnosis code was present.
+            tests:
+                - not_null
+                - relationships:
+                    to: ref('stg_encounters')
+                    field: encounter_id
+
+          - name: diagnosis_code
+            description: >
+              ICD-10 diagnosis code related to this diagnosis.
+            tests:
+                - not_null
+
+          - name: diagnosis_code_ranking
+            description: >
+              Integer representing the ranking of this diagnosis code (e.g. 1,2,3,...).
+            tests:
+                - not_null
+
+          - name: present_on_admission_code
+            description: >
+              Code representing whether the diagnosis was present on admission.

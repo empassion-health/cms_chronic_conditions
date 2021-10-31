@@ -1,0 +1,48 @@
+version: 2
+
+models:
+    - name: stg_encounters
+      description: >
+        A table of unique encounters for all members (patients).
+        Each row is a unique encounter for a given member.
+
+      columns:
+          - name: encounter_id
+            description: "The primary key for this table (a unique ID for each encounter)."
+            tests:
+                - unique
+                - not_null
+
+          - name: member_id
+            description: "The member_id for the member involved in the encounter."
+            tests:
+                - not_null
+                - relationships:
+                    to: ref('stg_members')
+                    field: member_id
+
+          - name: encounter_start_date
+            description: >
+              The encounter start date in this format: 'YYYY-mm-dd'.
+            tests:
+                - not_null
+
+          - name: encounter_end_date
+            description: >
+              The encounter end date in this format: 'YYY-mm-dd'.
+            tests:
+                - not_null
+
+          - name: admit_type_code
+            description: >
+              The admit type code
+
+          - name: admit_source_code
+            description: >
+              The admit source code
+
+          - name: discharge_status_code
+            description: >
+              The discharge status code
+            tests:
+                - not_null
