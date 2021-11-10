@@ -13,13 +13,13 @@ models:
                 - unique
                 - not_null
 
-          - name: member_id
-            description: "The member_id for the member involved in the encounter."
+          - name: patient_id
+            description: "Unique identifier for each patient involved in the encounter."
             tests:
                 - not_null
                 - relationships:
-                    to: ref('stg_members')
-                    field: member_id
+                    to: ref('stg_patients')
+                    field: patient_id
 
           - name: encounter_start_date
             description: >

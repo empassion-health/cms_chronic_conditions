@@ -1,0 +1,43 @@
+version: 2
+
+models:
+    - name: union_calculations
+      description: >
+        This model unions condition flags from the 4 upstream models that calculate them.  It also calculates 3 metrics for each condition.  The resulting data is at the
+        patient-condition level (i.e. one record per patient-condition).
+
+
+      columns:
+          - name: patient_id
+            description: >
+              Unique ID for the patient.
+            tests:
+                - not_null
+
+          - name: condition_category
+            description: >
+              The category of the condition (e.g. Cardiovascular Disease).
+            tests:
+                - not_null
+
+          - name: condition
+            description: >
+              The name of the chronic condition.
+            tests:
+                - not_null
+
+          - name: condition_onset_date
+            description: >
+              The date the patient was first diagnosed with the condition.
+
+          - name: condition_recent_date
+            description: >
+              The date the patient was most recently diagnosed with the condition.
+
+          - name: condition_count
+            description: >
+              The total number of times the patient had an encounter with this condition.
+            tests:
+              - dbt_utils.accepted_range:
+                  min_value: 0
+                  max_value: 12
