@@ -10,7 +10,7 @@ This package contains transformation models, designed to work against four input
 
 | **model** | **description** |
 | --------------- | -------------------- |
-| [condition_logic_simple](models/greenhouse__application_enhanced.sql) | Blah |
+| [condition_logic_simple](models/chronic_conditions/condition_logic_simple.sql) | Blah |
 
 
 
