@@ -13,10 +13,6 @@ models:
 
           - name: gender_code
             description: "A string that takes one of two values: 'male', 'female' "
-            tests:
-              - categorical_data_lookup:
-                  code_set: "Gender Code"
-
 
           - name: birth_date
             description: >

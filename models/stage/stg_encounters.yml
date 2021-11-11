@@ -41,6 +41,3 @@ models:
           - name: discharge_status_code
             description: >
               The discharge status code for the encounter.  Indicates where a patient was discharged to.
-            tests:
-                - categorical_data_lookup:
-                    code_set: Discharge Disposition
