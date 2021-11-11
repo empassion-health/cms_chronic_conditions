@@ -11,20 +11,14 @@ models:
           - name: patient_id
             description: >
               Unique ID for the patient.
-            tests:
-                - not_null
 
           - name: encounter_id
             description: >
               Unique ID for each encounter (visit).
-            tests:
-                - not_null
 
           - name: encounter_start_date
             description: >
               The date the encounter began.
-            tests:
-                - not_null
 
           - name: condition_category
             description: >

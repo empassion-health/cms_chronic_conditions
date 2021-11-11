@@ -1,5 +1,5 @@
 
-{{ config(materialized='table') }}
+{{ config(materialized='view') }}
 
 with patients as (
 select

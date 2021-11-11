@@ -1,5 +1,5 @@
 
-{{ config(materialized='table') }}
+{{ config(materialized='view') }}
 
 select
     cast(encounter_id as string) as encounter_id,

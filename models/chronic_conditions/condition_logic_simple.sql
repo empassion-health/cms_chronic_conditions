@@ -1,12 +1,12 @@
 
-{{ config(materialized='table') }}
+{{ config(materialized='view') }}
 
 with patients as (
 select
     a.patient_id
 ,   b.encounter_id
 ,   b.encounter_start_date
-from {{ref('stg_patients')}}  a
+from {{ref('stg_patients')}} a
 left join {{ref('stg_encounters')}}  b
     on a.patient_id = b.patient_id    
 )
