@@ -10,7 +10,7 @@ This package contains transformation models, designed to work against four input
 
 | **model** | **description** |
 | --------------- | -------------------- |
-| [condition_logic_simple](models/chronic_conditions/condition_logic_simple.sql) | Blah |
+| [condition_logic_simple](models/chronic_conditions/condition_logic_simple.sql) | Joins all available codes from stg_diagnoses and stg_procedures to the proper codes in chronic_conditions.csv (data/chronic_conditions.csv) |
 
 
 
