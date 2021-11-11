@@ -11,20 +11,14 @@ models:
           - name: patient_id
             description: >
               Unique ID for the patient.
-            tests:
-                - not_null
 
           - name: condition_category
             description: >
               The category of the condition (e.g. Cardiovascular Disease).
-            tests:
-                - not_null
 
           - name: condition
             description: >
               The name of the chronic condition.
-            tests:
-                - not_null
 
           - name: condition_onset_date
             description: >

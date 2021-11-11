@@ -20,11 +20,7 @@ models:
           - name: procedure_code
             description: >
               ICD-10-PCS procedure code related to this diagnosis.
-            tests:
-                - not_null
 
           - name: procedure_code_ranking
             description: >
               Integer representing the ranking of this procedure code (e.g. 1,2,3,...).
-            tests:
-                - not_null

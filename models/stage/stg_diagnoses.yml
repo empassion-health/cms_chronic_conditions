@@ -3,14 +3,12 @@ version: 2
 models:
     - name: stg_diagnoses
       description: >
-        A table of all present diagnosis codes for all members.
-
+        A table of all diagnosis codes for all patients and encounters (one record per diagnosis code).
 
       columns:
           - name: encounter_id
             description: >
-              The encounter_id corresponding to the encounter where this
-              diagnosis code was present.
+              The ID corresponding to the encounter where this diagnosis code occurred.
             tests:
                 - not_null
                 - relationships:
@@ -19,15 +17,11 @@ models:
 
           - name: diagnosis_code
             description: >
-              ICD-10 diagnosis code related to this diagnosis.
-            tests:
-                - not_null
+              ICD-10-CM diagnosis code for this diagnosis.
 
           - name: diagnosis_code_ranking
             description: >
-              Integer representing the ranking of this diagnosis code (e.g. 1,2,3,...).
-            tests:
-                - not_null
+              Integer representing the ranking of this diagnosis code.  1 is the primary diagnosis for the encounter.  2 or greater is a secondary diagnosis.
 
           - name: present_on_admission_code
             description: >
