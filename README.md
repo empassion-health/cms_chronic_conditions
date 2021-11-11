@@ -10,8 +10,9 @@ This package contains transformation models, designed to work against four input
 
 | **model** | **description** |
 | --------------- | -------------------- |
-| [condition_logic_simple](models/chronic_conditions/condition_logic_simple.sql) | Joins all available codes from stg_diagnoses and stg_procedures to the proper codes in [chronic_conditions](data/chronic_conditions.csv) |
-
+| [condition_logic_simple](models/chronic_conditions/condition_logic_simple.sql) | Joins all available codes from stg_diagnoses and stg_procedures to the proper codes in [chronic_conditions](data/chronic_conditions.csv).  Conditions using this simple logic can be flagged from diagnoses or procedures of any rank. |
+| [condition_logic](models/chronic_conditions/condition_logic.sql) | Joins codes from stg_diagnoses and stg_procedures to the proper codes in [chronic_conditions](data/chronic_conditions.csv).  Conditions using this logic require additional criteria (e.g. only consider primary diagnosis). |
+| [stroke_transient_ischemic_attack](models/chronic_conditions/stroke_transient_ischemic_attack.sql) | Creates condition flags for stroke or TIA (mini-stroke) by joining diagnosis codes to [chronic_conditions](data/chronic_conditions.csv).  Conditions using this logic require additional criteria (e.g. only consider primary diagnosis). |
 
 
 
