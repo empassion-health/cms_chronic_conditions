@@ -6,8 +6,8 @@ select
     a.patient_id
 ,   b.condition_column_name
 ,   1 as condition_count
-from {{ref('union_calculations')}} a
-inner join (select distinct condition, condition_column_name from {{ref('chronic_conditions')}}) b
+from {{ ref('union_calculations') }} a
+inner join (select distinct condition, condition_column_name from {{ ref('chronic_conditions') }}) b
     on a.condition = b.condition
 )
 

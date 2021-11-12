@@ -8,10 +8,10 @@ select
 ,   b.encounter_start_date
 ,   c.diagnosis_code
 ,   c.diagnosis_code_ranking
-from {{ref('stg_patients')}}  a
-left join {{ref('stg_encounters')}}  b
+from {{ source('staging','patients') }}  a
+left join {{ source('staging','encounters') }}  b
     on a.patient_id = b.patient_id    
-left join tuva.public.stg_diagnoses c
+left join {{ source('staging','diagnoses') }} c
     on b.encounter_id = c.encounter_id
 )
 
@@ -23,9 +23,9 @@ select
 ,   condition_category
 ,   condition
 from patients a
-inner join {{ref('chronic_conditions')}} b
+inner join {{ ref('chronic_conditions') }} b
     on a.diagnosis_code = b.code
-    and b.condition = 'Stroke/Transient Ischemic Attack'
+    and b.condition = 'Benign Prostatic Hyperplasia'
     and b.inclusion_type = 'Include'
 )
 
@@ -33,9 +33,9 @@ inner join {{ref('chronic_conditions')}} b
 select distinct
    a.encounter_id
 from patients a
-inner join {{ref('chronic_conditions')}} b
+inner join {{ ref('chronic_conditions') }} b
     on a.diagnosis_code = b.code
-    and b.condition = 'Stroke/Transient Ischemic Attack'
+    and b.condition = 'Benign Prostatic Hyperplasia'
     and b.inclusion_type = 'Exclude'
 )
 

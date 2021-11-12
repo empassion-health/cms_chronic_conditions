@@ -8,10 +8,10 @@ select
 ,   b.encounter_start_date
 ,   c.diagnosis_code
 ,   c.diagnosis_code_ranking
-from {{ref('stg_patients')}}  a
-left join {{ref('stg_encounters')}}  b
+from {{ source('staging','patients') }}  a
+left join {{ source('staging','encounters') }}  b
     on a.patient_id = b.patient_id    
-left join tuva.public.stg_diagnoses c
+left join {{ source('staging','diagnoses') }} c
     on b.encounter_id = c.encounter_id
 )
 
@@ -22,7 +22,7 @@ select
 ,   condition_category
 ,   condition
 from patients a
-inner join {{ref('chronic_conditions')}} b
+inner join {{ ref('chronic_conditions') }} b
     on a.diagnosis_code = b.code
     and a.diagnosis_code_ranking in (1,2)
     and b.condition = 'Acute Myocardial Infarction'
@@ -38,7 +38,7 @@ select
 ,   condition_category
 ,   condition
 from patients a
-inner join {{ref('chronic_conditions')}} b
+inner join {{ ref('chronic_conditions') }} b
     on a.diagnosis_code = b.code
     and a.diagnosis_code_ranking in (1,2)
     and b.condition = 'Atrial Fibrillation'
@@ -53,7 +53,7 @@ select
 ,   condition_category
 ,   condition
 from patients a
-inner join {{ref('chronic_conditions')}} b
+inner join {{ ref('chronic_conditions') }} b
     on a.diagnosis_code = b.code
     and a.diagnosis_code_ranking = 1
     and b.condition = 'Cataract'
@@ -68,7 +68,7 @@ select
 ,   condition_category
 ,   condition
 from patients a
-inner join {{ref('chronic_conditions')}} b
+inner join {{ ref('chronic_conditions') }} b
     on a.diagnosis_code = b.code
     and a.diagnosis_code_ranking = 1
     and b.condition = 'Glaucoma'
