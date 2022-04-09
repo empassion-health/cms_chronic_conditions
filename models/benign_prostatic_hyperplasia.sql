@@ -7,10 +7,9 @@ select
 ,   a.encounter_start_date
 ,   b.code
 ,   b.diagnosis_rank
-from {{ var('encounter') }}  a
-    on a.patient_id = b.patient_id    
+from {{ var('encounter') }}  a  
 left join {{ var('condition') }} b
-    on b.encounter_id = c.encounter_id
+    on a.encounter_id = b.encounter_id
 )
 
 , inclusion_diagnoses as (

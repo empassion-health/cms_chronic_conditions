@@ -24,7 +24,7 @@ select
 ,   a.encounter_start_date
 ,   c.condition_category
 ,   c.condition
-from patients a
+from diagnosis_conditions a
 inner join {{ var('procedure') }}  b
     on a.encounter_id = b.encounter_id
 inner join {{ ref('chronic_conditions') }}  c
