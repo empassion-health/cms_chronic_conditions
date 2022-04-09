@@ -1,17 +1,15 @@
-
 {{ config(materialized='view') }}
 
 with patients as (
 select
     a.patient_id
-,   b.encounter_id
-,   b.encounter_start_date
-,   c.diagnosis_code
-,   c.diagnosis_code_ranking
-from {{ source('staging','patients') }}  a
-left join {{ source('staging','encounters') }}  b
+,   a.encounter_id
+,   a.encounter_start_date
+,   b.code
+,   b.diagnosis_rank
+from {{ var('encounter') }}  a
     on a.patient_id = b.patient_id    
-left join {{ source('staging','diagnoses') }} c
+left join {{ var('condition') }} b
     on b.encounter_id = c.encounter_id
 )
 
@@ -24,7 +22,7 @@ select
 ,   condition
 from patients a
 inner join {{ ref('chronic_conditions') }} b
-    on a.diagnosis_code = b.code
+    on a.code = b.code
     and b.condition = 'Benign Prostatic Hyperplasia'
     and b.inclusion_type = 'Include'
 )
@@ -34,7 +32,7 @@ select distinct
    a.encounter_id
 from patients a
 inner join {{ ref('chronic_conditions') }} b
-    on a.diagnosis_code = b.code
+    on a.code = b.code
     and b.condition = 'Benign Prostatic Hyperplasia'
     and b.inclusion_type = 'Exclude'
 )

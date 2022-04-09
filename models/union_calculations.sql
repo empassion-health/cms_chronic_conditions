@@ -1,4 +1,3 @@
-
 {{ config(materialized='view') }}
 
 with condition_union as (
