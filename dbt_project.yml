@@ -1,8 +1,8 @@
 name: 'chronic_conditions'
-version: '0.1.0'
+version: '1.0.0'
 config-version: 2
 
-profile: syntegra_snowflake       # configuration required (your profile to connect dbt to your data warehouse)
+profile: tuva_snowflake       # configuration required (your profile to connect dbt to your data warehouse)
 
 vars:
     source_database: tuva         # configuration required (name of the database where data feeding this project is stored - tuva by default)
@@ -13,10 +13,10 @@ vars:
     condition: "{{ source(var('source_name'),'condition') }}"
     procedure: "{{ source(var('source_name'),'procedure') }}"
 
-source-paths: ["models"]
+model-paths: ["models"]
 analysis-paths: ["analysis"]
 test-paths: ["tests"]
-data-paths: ["data"]
+seed-paths: ["data"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
@@ -34,4 +34,4 @@ seeds:
   chronic_conditions:
     +database: tuva
     +schema: terminology
-    +tags: terminolgoy
+    +tags: terminology
