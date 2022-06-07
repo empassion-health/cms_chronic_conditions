@@ -1,7 +1,7 @@
 version: 2
 
 models:
-    - name: stroke_transient_ischemic_attack
+    - name: stg__stroke_transient_ischemic_attack
       description: This model contains logic for identifying patients with a history of stroke or transient ischemic attack (essentially a mini-stroke).  The logic for this condition
         is stored in a separate model because it's more complex than other conditions.
       columns:

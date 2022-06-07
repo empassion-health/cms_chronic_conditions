@@ -2,22 +2,22 @@
 
 with condition_union as (
 select *
-from {{ ref('condition_logic_simple') }}
+from {{ ref('stg__condition_logic_simple') }}
 
 union
 
 select *
-from {{ ref('condition_logic') }}
+from {{ ref('stg__condition_logic') }}
 
 union
 
 select *
-from {{ ref('benign_prostatic_hyperplasia') }}
+from {{ ref('stg__benign_prostatic_hyperplasia') }}
 
 union
 
 select *
-from {{ ref('stroke_transient_ischemic_attack') }}
+from {{ ref('stg__stroke_transient_ischemic_attack') }}
 )
 
 select

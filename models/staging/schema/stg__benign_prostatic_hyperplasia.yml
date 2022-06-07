@@ -1,7 +1,7 @@
 version: 2
 
 models:
-    - name: benign_prostatic_hyperplasia
+    - name: stg__benign_prostatic_hyperplasia
       description: This model contains logic for identifying patients with a history of benign prostatic hyperplasia, also known as an enlarged prostate gland.  The logic for this condition
         is stored in a separate model because it's more complex than other conditions.
       columns:
