@@ -1,4 +1,4 @@
---TODO: delete model
+--TODO: refactor
 {{ config(enabled=false) }}
 {{ config(materialized='view') }}
 

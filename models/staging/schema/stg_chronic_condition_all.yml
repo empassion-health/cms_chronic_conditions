@@ -1,0 +1,34 @@
+version: 2
+
+models:
+    - name: stg_chronic_condition_all
+      description: This model contains logic for all chronic conditions except HIV/AIDs and Opiod Use Disorder (defined in other models).
+        > This model maps ICD-10-CM diagnosis codes, ICD-10-PCS procedure codes, HCPCS codes, and MS DRG codes to chronic conditions.
+      columns:
+          - name: patient_id
+            description: Unique ID for the patient.
+            tests:
+              - not_null
+
+          - name: encounter_id
+            description: Unique ID for each encounter (visit).
+            tests:
+              - not_null
+
+          - name: encounter_start_date
+            description: The date the encounter began.
+
+          - name: chronic_condition_type
+            description: The type of chronic condition as defined by CMS. ('Common' or 'Other chronic or potentially disabling conditions')
+            tests:
+              - not_null
+
+          - name: condition_category
+            description: The category of the condition (e.g. Cardiovascular Disease).
+            tests:
+              - not_null
+
+          - name: condition
+            description: The name of the chronic condition.
+            tests:
+              - not_null
