@@ -1,23 +1,25 @@
+--TODO: delete model
+{{ config(enabled=false) }}
 {{ config(materialized='view') }}
 
 with condition_union as (
 select *
-from {{ ref('stg__condition_logic_simple') }}
+from {{ ref('stg_condition_logic_simple') }}
 
 union
 
 select *
-from {{ ref('stg__condition_logic') }}
+from {{ ref('stg_condition_logic') }}
 
 union
 
 select *
-from {{ ref('stg__benign_prostatic_hyperplasia') }}
+from {{ ref('stg_benign_prostatic_hyperplasia') }}
 
 union
 
 select *
-from {{ ref('stg__stroke_transient_ischemic_attack') }}
+from {{ ref('stg_stroke_transient_ischemic_attack') }}
 )
 
 select

@@ -1,3 +1,5 @@
+--TODO: delete model
+{{ config(enabled=false) }}
 {{ config(materialized='view') }}
 
 with diagnosis_conditions as (

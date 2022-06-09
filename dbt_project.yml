@@ -2,21 +2,22 @@ name: 'chronic_conditions'
 version: '1.0.0'
 config-version: 2
 
-profile: tuva_snowflake       # configuration required (your profile to connect dbt to your data warehouse)
+profile: tuva_snowflake       # configuration required (your profile to connect dbt to your seeds warehouse)
 
 vars:
-    source_database: tuva         # configuration required (name of the database where data feeding this project is stored - tuva by default)
-    source_schema: core           # configuration required (name of the schema where data feeding this project is stored - core by default)
-    source_name: core             # configuration required (name of describing the dataset feeding this project - typically matches schema name)
+  source_database: tuva         # configuration required (name of the database where seeds feeding this project is stored - tuva by default)
+  source_schema: core           # configuration required (name of the schema where seeds feeding this project is stored - core by default)
+  source_name: core             # configuration required (name of describing the dataset feeding this project - typically matches schema name)
 
-    encounter: "{{ source(var('source_name'),'encounter') }}"
-    condition: "{{ source(var('source_name'),'condition') }}"
-    procedure: "{{ source(var('source_name'),'procedure') }}"
+  condition: "{{ source(var('source_name'),'condition') }}"
+  encounter: "{{ source(var('source_name'),'encounter') }}"
+  medication: "{{ source(var('source_name'),'medication') }}"
+  procedure: "{{ source(var('source_name'),'procedure') }}"
 
 model-paths: ["models"]
 analysis-paths: ["analysis"]
 test-paths: ["tests"]
-seed-paths: ["data"]
+seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 

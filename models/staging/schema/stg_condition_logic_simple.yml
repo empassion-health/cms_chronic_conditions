@@ -1,7 +1,7 @@
 version: 2
 
 models:
-    - name: stg__condition_logic_simple
+    - name: stg_condition_logic_simple
       description: This model contains simple logic for mapping ICD-10-CM diagnosis codes and ICD-10-PCS procedure codes to chronic conditions.  The conditions mapped using this
         model do not require special logic.
       columns:

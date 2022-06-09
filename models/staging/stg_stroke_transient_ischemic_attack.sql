@@ -1,3 +1,5 @@
+--TODO: delete model
+{{ config(enabled=false) }}
 {{ config(materialized='view') }}
 
 with patients as (
@@ -7,7 +9,7 @@ select
 ,   a.encounter_start_date
 ,   b.code
 ,   b.diagnosis_rank
-from {{ var('encounter') }}  a  
+from {{ var('encounter') }}  a 
 left join {{ var('condition') }} b
     on a.encounter_id = b.encounter_id
 )
@@ -22,7 +24,7 @@ select
 from patients a
 inner join {{ ref('chronic_conditions') }} b
     on a.code = b.code
-    and b.condition = 'Benign Prostatic Hyperplasia'
+    and b.condition = 'Stroke/Transient Ischemic Attack'
     and b.inclusion_type = 'Include'
 )
 
@@ -32,7 +34,7 @@ select distinct
 from patients a
 inner join {{ ref('chronic_conditions') }} b
     on a.code = b.code
-    and b.condition = 'Benign Prostatic Hyperplasia'
+    and b.condition = 'Stroke/Transient Ischemic Attack'
     and b.inclusion_type = 'Exclude'
 )
 
