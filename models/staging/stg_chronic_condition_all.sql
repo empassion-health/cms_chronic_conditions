@@ -37,7 +37,8 @@ inclusions_diagnosis as (
     from patient_encounters
          inner join chronic_conditions
              on patient_encounters.diagnosis_code = chronic_conditions.code
-             and chronic_conditions.inclusion_type = 'Include'
+    where chronic_conditions.inclusion_type = 'Include'
+    and chronic_conditions.additional_logic = 'None'
 
 ),
 
@@ -53,7 +54,8 @@ inclusions_procedure as (
     from patient_encounters
          inner join chronic_conditions
              on patient_encounters.procedure_code = chronic_conditions.code
-             and chronic_conditions.inclusion_type = 'Include'
+    where chronic_conditions.inclusion_type = 'Include'
+    and chronic_conditions.additional_logic = 'None'
 
 ),
 
@@ -69,7 +71,8 @@ inclusions_ms_drg as (
     from patient_encounters
          inner join chronic_conditions
              on patient_encounters.ms_drg = chronic_conditions.code
-             and chronic_conditions.inclusion_type = 'Include'
+    where chronic_conditions.inclusion_type = 'Include'
+    and chronic_conditions.additional_logic = 'None'
 
 ),
 
