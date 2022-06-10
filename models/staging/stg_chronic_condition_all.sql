@@ -38,6 +38,7 @@ inclusions_diagnosis as (
          inner join chronic_conditions
              on patient_encounters.diagnosis_code = chronic_conditions.code
     where chronic_conditions.inclusion_type = 'Include'
+    and chronic_conditions.code_system = 'ICD-10-CM'
     and chronic_conditions.additional_logic = 'None'
 
 ),
@@ -55,6 +56,7 @@ inclusions_procedure as (
          inner join chronic_conditions
              on patient_encounters.procedure_code = chronic_conditions.code
     where chronic_conditions.inclusion_type = 'Include'
+    and chronic_conditions.code_system = 'ICD-10-PCS'
     and chronic_conditions.additional_logic = 'None'
 
 ),
@@ -72,6 +74,7 @@ inclusions_ms_drg as (
          inner join chronic_conditions
              on patient_encounters.ms_drg = chronic_conditions.code
     where chronic_conditions.inclusion_type = 'Include'
+    and chronic_conditions.code_system = 'MS-DRG'
     and chronic_conditions.additional_logic = 'None'
 
 ),
@@ -85,6 +88,7 @@ exclusions_diagnosis as (
          inner join chronic_conditions
              on patient_encounters.diagnosis_code = chronic_conditions.code
     where chronic_conditions.inclusion_type = 'Exclude'
+    and chronic_conditions.code_system = 'ICD-10-CM'
 
 ),
 

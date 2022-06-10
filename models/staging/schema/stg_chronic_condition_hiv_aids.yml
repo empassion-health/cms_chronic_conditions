@@ -24,7 +24,7 @@ models:
               - not_null
 
           - name: condition_category
-            description: The category of the condition (e.g. Cardiovascular Disease).
+            description: The category of the condition (e.g. Human Immunodeficiency Virus and/or Acquired Immunodeficiency Syndrome).
             tests:
               - not_null
 
@@ -32,3 +32,5 @@ models:
             description: The name of the chronic condition.
             tests:
               - not_null
+              - accepted_values:
+                  values: [ 'Human Immunodeficiency Virus and/or Acquired Immunodeficiency Syndrome (HIV/AIDS)' ]
