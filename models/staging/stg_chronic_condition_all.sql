@@ -56,7 +56,7 @@ inclusions_procedure as (
          inner join chronic_conditions
              on patient_encounters.procedure_code = chronic_conditions.code
     where chronic_conditions.inclusion_type = 'Include'
-    and chronic_conditions.code_system = 'ICD-10-PCS'
+    and chronic_conditions.code_system in ('ICD-10-PCS', 'HCPCS')
     and chronic_conditions.additional_logic = 'None'
 
 ),

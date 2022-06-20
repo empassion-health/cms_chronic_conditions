@@ -1,9 +1,10 @@
 version: 2
 
 models:
-    - name: stg_chronic_condition_hiv_aids
-      description: This model contains logic for the chronic condition Human Immunodeficiency Virus and/or Acquired Immunodeficiency Syndrome (HIV/AIDS).
-        > This model maps ICD-10-CM diagnosis codes and MS DRG codes to the chronic condition.
+    - name: stg_chronic_condition_oud
+      description: This model contains logic for the chronic condition Opioid Use Disorder (OUD).
+        > This model maps ICD-10-CM diagnosis codes, ICD-10-PCS procedure codes, HCPCS codes, and NDC codes to the chronic condition.
+
       columns:
           - name: patient_id
             description: Unique ID for the patient.
@@ -24,7 +25,7 @@ models:
               - not_null
 
           - name: condition_category
-            description: The category of the condition (e.g. Other).
+            description: The category of the condition (e.g. Substance Abuse).
             tests:
               - not_null
 
@@ -33,4 +34,4 @@ models:
             tests:
               - not_null
               - accepted_values:
-                  values: [ 'Human Immunodeficiency Virus and/or Acquired Immunodeficiency Syndrome (HIV/AIDS)' ]
+                  values: [ 'Opioid Use Disorder (OUD)' ]
