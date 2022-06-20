@@ -25,9 +25,9 @@ patient_encounters as (
 ),
 
 /*
-    This condition has an exception: ICD-10-CM R75 requires a second qualifying claim that is not R75 (a screening code)
+    This condition has an exception: A claim with the diagnosis code R75 requires a second qualifying claim that is not R75 (a screening code)
     This CTE excludes encounters with the exception code. Those encounters will be evaluated separately.
- */
+*/
 inclusions_diagnosis as (
 
     select
@@ -64,9 +64,9 @@ inclusions_ms_drg as (
 ),
 
 /*
-    This condition has an exception: ICD-10-CM R75 requires a second qualifying claim that is not R75 (a screening code)
+    This condition has an exception: A claim with the diagnosis code R75 requires a second qualifying claim that is not R75 (a screening code)
     This CTE includes encounters with the exception code only where that patient has another encounter that is not R75.
- */
+*/
 exception_diagnosis as (
 
     select
