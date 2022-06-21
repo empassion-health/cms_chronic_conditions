@@ -27,6 +27,7 @@ patient_encounters as (
         , encounter.encounter_id
         , encounter.encounter_start_date
         , encounter.ms_drg
+        , encounter.data_source
         , diagnosis.code as diagnosis_code
         , diagnosis.code_type as diagnosis_code_type
         , procedure.code as procedure_code
@@ -46,6 +47,7 @@ patient_medications as (
         , patient_id
         , coalesce(filled_date, paid_date) as encounter_start_date
         , ndc
+        , data_source
     from {{ var('medication') }}
 
 ),
@@ -56,6 +58,7 @@ inclusions_diagnosis as (
           patient_encounters.patient_id
         , patient_encounters.encounter_id
         , patient_encounters.encounter_start_date
+        , patient_encounters.data_source
         , chronic_conditions.chronic_condition_type
         , chronic_conditions.condition_category
         , chronic_conditions.condition
@@ -73,6 +76,7 @@ inclusions_procedure as (
           patient_encounters.patient_id
         , patient_encounters.encounter_id
         , patient_encounters.encounter_start_date
+        , patient_encounters.data_source
         , chronic_conditions.chronic_condition_type
         , chronic_conditions.condition_category
         , chronic_conditions.condition
@@ -93,6 +97,7 @@ inclusions_medication as (
           patient_medications.patient_id
         , patient_medications.encounter_id
         , patient_medications.encounter_start_date
+        , patient_medications.data_source
         , chronic_conditions.chronic_condition_type
         , chronic_conditions.condition_category
         , chronic_conditions.condition
@@ -126,13 +131,8 @@ exclusions_other_chronic_conditions as (
     Alcohol Use Disorder or Drug Use Disorder and missing the Opioid Use Disorder diagnosis codes.
 */
 exclusions_medication as (
-    select
+    select distinct
           patient_medications.patient_id
-        , patient_medications.encounter_id
-        , patient_medications.encounter_start_date
-        , chronic_conditions.chronic_condition_type
-        , chronic_conditions.condition_category
-        , chronic_conditions.condition
     from patient_medications
          inner join chronic_conditions
              on patient_encounters.ndc = chronic_conditions.code
@@ -164,6 +164,7 @@ select distinct
     , inclusions_unioned.chronic_condition_type
     , inclusions_unioned.condition_category
     , inclusions_unioned.condition
+    , inclusions_unioned.data_source
 from inclusions_unioned
      left join exclusions_medication
          on inclusions_unioned.patient_id = exclusions_medication.patient_id

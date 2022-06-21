@@ -16,6 +16,7 @@ patient_encounters as (
         , encounter.encounter_id
         , encounter.encounter_start_date
         , encounter.ms_drg
+        , encounter.data_source
         , diagnosis.code as diagnosis_code
         , diagnosis.code_type as diagnosis_code_type
     from {{ var('encounter') }} as encounter
@@ -34,6 +35,7 @@ inclusions_diagnosis as (
           patient_encounters.patient_id
         , patient_encounters.encounter_id
         , patient_encounters.encounter_start_date
+        , patient_encounters.data_source
         , chronic_conditions.chronic_condition_type
         , chronic_conditions.condition_category
         , chronic_conditions.condition
@@ -52,6 +54,7 @@ inclusions_ms_drg as (
           patient_encounters.patient_id
         , patient_encounters.encounter_id
         , patient_encounters.encounter_start_date
+        , patient_encounters.data_source
         , chronic_conditions.chronic_condition_type
         , chronic_conditions.condition_category
         , chronic_conditions.condition
@@ -73,6 +76,7 @@ exception_diagnosis as (
           patient_encounters.patient_id
         , patient_encounters.encounter_id
         , patient_encounters.encounter_start_date
+        , patient_encounters.data_source
         , chronic_conditions.chronic_condition_type
         , chronic_conditions.condition_category
         , chronic_conditions.condition
@@ -104,4 +108,5 @@ select distinct
     , inclusions_unioned.chronic_condition_type
     , inclusions_unioned.condition_category
     , inclusions_unioned.condition
+    , inclusions_unioned.data_source
 from inclusions_unioned

@@ -8,44 +8,72 @@ sources:
         columns:
           - name: encounter_id
             description: Unique ID for each visit.
+
           - name: condition_date
             description: Date the condition was recorded.
+
           - name: code_type
             description: Type of condition code (e.g. icd-9-cm | icd-10-cm | snomed-ct).
+
           - name: code
             description: The actual condition code.
+
           - name: diagnosis_rank
             description: The order of diagnosis codes (applies to discharge diagnoses only, 1 indicates primary discharge diagnosis).
+
+          - name: data_source
+            description: Indicates the name of the source dataset (e.g. Medicare Claims).
+
       - name: encounter
         description: Visit-level information for all different encounter types (1 record per visit).
         columns:
           - name: encounter_id
             description: Unique ID for each visit.
+
           - name: patient_id
             description: Unique ID for the patient.  
+
           - name: encounter_start_date
             description: Start date for the encounter.
+
+          - name: data_source
+            description: Indicates the name of the source dataset (e.g. Medicare Claims).
+
       - name: medication
         description: Info about medication requests, administrations, and prescriptions.
         columns:
           - name: encounter_id
             description: Unique ID for each visit.
+
           - name: patient_id
             description: Unique ID for the patient.
+
           - name: filled_date
             description: Date the prescription was filled.
+
           - name: paid_date
             description: Date the prescription as paid.
+
           - name: ndc
             description: NDC code associated with the medication.
+
+          - name: data_source
+            description: Indicates the name of the source dataset (e.g. Medicare Claims).
+
       - name: procedure
         description: Info about procedures including cpt and icd-10-pcs.
         columns:
           - name: encounter_id
             description: Unique ID for each visit.
+
           - name: procedure_date
             description: Date when the procedure was performed.
+
           - name: code_type
             description: Indicates the type of procedure (e.g. cpt | icd-10-pcs).
+
           - name: code
             description: Procedure code.
+
+          - name: data_source
+            description: Indicates the name of the source dataset (e.g. Medicare Claims).
