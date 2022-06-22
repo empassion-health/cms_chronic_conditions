@@ -107,13 +107,13 @@ inclusions_unioned as (
 )
 
 select distinct
-      inclusions_unioned.patient_id
-    , inclusions_unioned.encounter_id
-    , inclusions_unioned.encounter_start_date
-    , inclusions_unioned.chronic_condition_type
-    , inclusions_unioned.condition_category
-    , inclusions_unioned.condition
-    , inclusions_unioned.data_source
+      cast(inclusions_unioned.patient_id as varchar(255)) as patient_id
+    , cast(inclusions_unioned.encounter_id as varchar(255)) as encounter_id
+    , cast(inclusions_unioned.encounter_start_date as date) as encounter_start_date
+    , cast(inclusions_unioned.chronic_condition_type as varchar(255)) as chronic_condition_type
+    , cast(inclusions_unioned.condition_category as varchar(255)) as condition_category
+    , cast(inclusions_unioned.condition as varchar(255)) as condition
+    , cast(inclusions_unioned.data_source as varchar(255)) as data_source
 from inclusions_unioned
      left join exclusions_diagnosis
          on inclusions_unioned.encounter_id = exclusions_diagnosis.encounter_id
