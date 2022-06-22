@@ -1,4 +1,4 @@
-{{ config(materialized='view') }}
+{{ config(materialized='ephemeral') }}
 
 {%- set condition_filter = 'Opioid Use Disorder (OUD)' -%}
 

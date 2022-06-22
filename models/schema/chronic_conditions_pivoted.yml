@@ -1,0 +1,237 @@
+version: 2
+
+models:
+    - name: chronic_conditions_pivoted
+      description: This model pivots conditions on the patient level (i.e. one record per patient) with flags for each chronic condition.
+
+      columns:
+          - name: patient_id
+            description: Unique ID for the patient.
+            tests:
+              - unique
+              - not_null
+
+          - name: acute_myocardial_infarction
+            description: chronic condition flag 1 or 0
+
+          - name: adhd_conduct_disorders_and_hyperkinetic_syndrome
+            description: chronic condition flag 1 or 0
+
+          - name: alcohol_use_disorders
+            description: chronic condition flag 1 or 0
+
+          - name: alzheimers_disease
+            description: chronic condition flag 1 or 0
+
+          - name: anemia
+            description: chronic condition flag 1 or 0
+
+          - name: anxiety_disorders
+            description: chronic condition flag 1 or 0
+
+          - name: asthma
+            description: chronic condition flag 1 or 0
+
+          - name: atrial_fibrillation_and_flutter
+            description: chronic condition flag 1 or 0
+
+          - name: autism_spectrum_disorders
+            description: chronic condition flag 1 or 0
+
+          - name: benign_prostatic_hyperplasia
+            description: chronic condition flag 1 or 0
+
+          - name: bipolar_disorder
+            description: chronic condition flag 1 or 0
+
+          - name: cancer_breast
+            description: chronic condition flag 1 or 0
+
+          - name: cancer_colorectal
+            description: chronic condition flag 1 or 0
+
+          - name: cancer_endometrial
+            description: chronic condition flag 1 or 0
+
+          - name: cancer_lung
+            description: chronic condition flag 1 or 0
+
+          - name: cancer_prostate
+            description: chronic condition flag 1 or 0
+
+          - name: cancer_urologic_kidney_renal_pelvis_and_ureter
+            description: chronic condition flag 1 or 0
+
+          - name: cataract
+            description: chronic condition flag 1 or 0
+
+          - name: cerebral_palsy
+            description: chronic condition flag 1 or 0
+
+          - name: chronic_kidney_disease
+            description: chronic condition flag 1 or 0
+
+          - name: chronic_obstructive_pulmonary_disease
+            description: chronic condition flag 1 or 0
+
+          - name: cystic_fibrosis_and_other_metabolic_developmental_disorders
+            description: chronic condition flag 1 or 0
+
+          - name: depression_bipolar_or_other_depressive_mood_disorders
+            description: chronic condition flag 1 or 0
+
+          - name: depressive_disorders
+            description: chronic condition flag 1 or 0
+
+          - name: diabetes
+            description: chronic condition flag 1 or 0
+
+          - name: drug_use_disorders
+            description: chronic condition flag 1 or 0
+
+          - name: epilepsy
+            description: chronic condition flag 1 or 0
+
+          - name: fibromyalgia_and_chronic_pain_and_fatigue
+            description: chronic condition flag 1 or 0
+
+          - name: glaucoma
+            description: chronic condition flag 1 or 0
+
+          - name: heart_failure_and_non_ischemic_heart_disease
+            description: chronic condition flag 1 or 0
+
+          - name: hepatitis_a
+            description: chronic condition flag 1 or 0
+
+          - name: hepatitis_b_acute_or_unspecified
+            description: chronic condition flag 1 or 0
+
+          - name: hepatitis_b_chronic
+            description: chronic condition flag 1 or 0
+
+          - name: hepatitis_c_acute
+            description: chronic condition flag 1 or 0
+
+          - name: hepatitis_c_chronic
+            description: chronic condition flag 1 or 0
+
+          - name: hepatitis_c_unspecified
+            description: chronic condition flag 1 or 0
+
+          - name: hepatitis_d
+            description: chronic condition flag 1 or 0
+
+          - name: hepatitis_e
+            description: chronic condition flag 1 or 0
+
+          - name: hip_pelvic_fracture
+            description: chronic condition flag 1 or 0
+
+          - name: human_immunodeficiency_virus_and_or_acquired_immunodeficiency_syndrome_hiv_aids
+            description: chronic condition flag 1 or 0
+
+          - name: hyperlipidemia
+            description: chronic condition flag 1 or 0
+
+          - name: hypertension
+            description: chronic condition flag 1 or 0
+
+          - name: hypothyroidism
+            description: chronic condition flag 1 or 0
+
+          - name: intellectual_disabilities_and_related_conditions
+            description: chronic condition flag 1 or 0
+
+          - name: ischemic_heart_disease
+            description: chronic condition flag 1 or 0
+
+          - name: learning_disabilities
+            description: chronic condition flag 1 or 0
+
+          - name: leukemias_and_lymphomas
+            description: chronic condition flag 1 or 0
+
+          - name: liver_disease_cirrhosis_and_other_liver_conditions_except_viral_hepatitis
+            description: chronic condition flag 1 or 0
+
+          - name: migraine_and_chronic_headache
+            description: chronic condition flag 1 or 0
+
+          - name: mobility_impairments
+            description: chronic condition flag 1 or 0
+
+          - name: multiple_sclerosis_and_transverse_myelitis
+            description: chronic condition flag 1 or 0
+
+          - name: muscular_dystrophy
+            description: chronic condition flag 1 or 0
+
+          - name: non_alzheimers_dementia
+            description: chronic condition flag 1 or 0
+
+          - name: obesity
+            description: chronic condition flag 1 or 0
+
+          - name: opioid_use_disorder_oud
+            description: chronic condition flag 1 or 0
+
+          - name: osteoporosis_with_or_without_pathological_fracture
+            description: chronic condition flag 1 or 0
+
+          - name: other_developmental_delays
+            description: chronic condition flag 1 or 0
+
+          - name: parkinsons_disease_and_secondary_parkinsonism
+            description: chronic condition flag 1 or 0
+
+          - name: peripheral_vascular_disease_pvd
+            description: chronic condition flag 1 or 0
+
+          - name: personality_disorders
+            description: chronic condition flag 1 or 0
+
+          - name: pneumonia_all_cause
+            description: chronic condition flag 1 or 0
+
+          - name: post_traumatic_stress_disorder_ptsd
+            description: chronic condition flag 1 or 0
+
+          - name: pressure_and_chronic_ulcers
+            description: chronic condition flag 1 or 0
+
+          - name: rheumatoid_arthritis_osteoarthritis
+            description: chronic condition flag 1 or 0
+
+          - name: schizophrenia
+            description: chronic condition flag 1 or 0
+
+          - name: schizophrenia_and_other_psychotic_disorders
+            description: chronic condition flag 1 or 0
+
+          - name: sensory_blindness_and_visual_impairment
+            description: chronic condition flag 1 or 0
+
+          - name: sensory_deafness_and_hearing_impairment
+            description: chronic condition flag 1 or 0
+
+          - name: sickle_cell_disease
+            description: chronic condition flag 1 or 0
+
+          - name: spina_bifida_and_other_congenital_anomalies_of_the_nervous_system
+            description: chronic condition flag 1 or 0
+
+          - name: spinal_cord_injury
+            description: chronic condition flag 1 or 0
+
+          - name: stroke_transient_ischemic_attack
+            description: chronic condition flag 1 or 0
+
+          - name: tobacco_use
+            description: chronic condition flag 1 or 0
+
+          - name: traumatic_brain_injury_and_nonpsychotic_mental_disorders_due_to_brain_damage
+            description: chronic condition flag 1 or 0
+
+          - name: viral_hepatitis_general
+            description: chronic condition flag 1 or 0
