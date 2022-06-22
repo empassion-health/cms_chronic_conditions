@@ -2,8 +2,9 @@ version: 2
 
 models:
     - name: stg_chronic_condition_hiv_aids
-      description: This model contains logic for the chronic condition Human Immunodeficiency Virus and/or Acquired Immunodeficiency Syndrome (HIV/AIDS).
-        > This model maps ICD-10-CM diagnosis codes and MS DRG codes to the chronic condition.
+      description: >
+        This model contains logic for the chronic condition Human Immunodeficiency Virus and/or Acquired Immunodeficiency Syndrome (HIV/AIDS).
+        This model maps ICD-10-CM diagnosis codes and MS DRG codes to the chronic condition.
       columns:
           - name: patient_id
             description: Unique ID for the patient.
