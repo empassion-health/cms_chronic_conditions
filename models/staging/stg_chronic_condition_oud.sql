@@ -28,13 +28,13 @@ patient_encounters as (
         , encounter.encounter_start_date
         , encounter.ms_drg
         , encounter.data_source
-        , diagnosis.code as diagnosis_code
-        , diagnosis.code_type as diagnosis_code_type
+        , condition.code as condition_code
+        , condition.code_type as condition_code_type
         , procedure.code as procedure_code
         , procedure.code_type as procedure_code_type
     from {{ var('encounter') }} as encounter
-         left join {{ var('condition') }} as diagnosis /* using alias to differentiate from chronic condition terms */
-             on encounter.encounter_id = diagnosis.encounter_id
+         left join {{ var('condition') }} as condition
+             on encounter.encounter_id = condition.encounter_id
          left join {{ var('procedure') }}  as procedure
              on encounter.encounter_id = procedure.encounter_id
 
@@ -64,7 +64,7 @@ inclusions_diagnosis as (
         , chronic_conditions.condition
     from patient_encounters
          inner join chronic_conditions
-             on patient_encounters.diagnosis_code = chronic_conditions.code
+             on patient_encounters.condition_code = chronic_conditions.code
     where chronic_conditions.inclusion_type = 'Include'
     and chronic_conditions.code_system = 'ICD-10-CM'
 
@@ -103,7 +103,7 @@ inclusions_medication as (
         , chronic_conditions.condition
     from patient_medications
          inner join chronic_conditions
-             on patient_encounters.ndc = chronic_conditions.code
+             on patient_medications.ndc = chronic_conditions.code
     where chronic_conditions.inclusion_type = 'Include'
     and chronic_conditions.code_system = 'NDC'
     and chronic_conditions.code not in {{ naltrexone_ndcs }}
@@ -135,7 +135,7 @@ exclusions_medication as (
           patient_medications.patient_id
     from patient_medications
          inner join chronic_conditions
-             on patient_encounters.ndc = chronic_conditions.code
+             on patient_medications.ndc = chronic_conditions.code
          inner join exclusions_other_chronic_conditions
              on patient_medications.patient_id = exclusions_other_chronic_conditions.patient_id
          left join inclusions_diagnosis
@@ -143,7 +143,7 @@ exclusions_medication as (
     where chronic_conditions.inclusion_type = 'Include'
     and chronic_conditions.code_system = 'NDC'
     and chronic_conditions.code in {{ naltrexone_ndcs }}
-    and inclusions_diagnosis is null
+    and inclusions_diagnosis.patient_id is null
 
 ),
 

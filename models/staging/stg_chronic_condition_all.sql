@@ -14,13 +14,13 @@ patient_encounters as (
         , encounter.encounter_start_date
         , encounter.ms_drg
         , encounter.data_source
-        , diagnosis.code as diagnosis_code
-        , diagnosis.code_type as diagnosis_code_type
+        , condition.code as condition_code
+        , condition.code_type as condition_code_type
         , procedure.code as procedure_code
         , procedure.code_type as procedure_code_type
     from {{ var('encounter') }} as encounter
-         left join {{ var('condition') }} as diagnosis /* using alias to differentiate from chronic condition terms */
-             on encounter.encounter_id = diagnosis.encounter_id
+         left join {{ var('condition') }} as condition
+             on encounter.encounter_id = condition.encounter_id
          left join {{ var('procedure') }}  as procedure
              on encounter.encounter_id = procedure.encounter_id
 
@@ -38,7 +38,7 @@ inclusions_diagnosis as (
         , chronic_conditions.condition
     from patient_encounters
          inner join chronic_conditions
-             on patient_encounters.diagnosis_code = chronic_conditions.code
+             on patient_encounters.condition_code = chronic_conditions.code
     where chronic_conditions.inclusion_type = 'Include'
     and chronic_conditions.code_system = 'ICD-10-CM'
     and chronic_conditions.additional_logic = 'None'
@@ -90,7 +90,7 @@ exclusions_diagnosis as (
         , chronic_conditions.condition
     from patient_encounters
          inner join chronic_conditions
-             on patient_encounters.diagnosis_code = chronic_conditions.code
+             on patient_encounters.condition_code = chronic_conditions.code
     where chronic_conditions.inclusion_type = 'Exclude'
     and chronic_conditions.code_system = 'ICD-10-CM'
 
