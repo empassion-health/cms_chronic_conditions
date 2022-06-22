@@ -2,7 +2,7 @@ name: 'chronic_conditions'
 version: '1.0.0'
 config-version: 2
 
-profile: tuva_snowflake       # configuration required (your profile to connect dbt to your seeds warehouse)
+profile: tuva_snowflake         # configuration required (your profile to connect dbt to your seeds warehouse)
 
 vars:
   source_database: tuva         # configuration required (name of the database where seeds feeding this project is stored - tuva by default)
