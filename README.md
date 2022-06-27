@@ -32,7 +32,7 @@ Execute the following steps to load all seed files, build all data marts, and ru
     2. Execute "dbt build" to create all tables/views in your data warehouse
 
 ## Usage
-This project has been configured to use variables for the input and output databases/schemas. This allows you to dynamically set the source and destination while running the dbt commands.  The default variable names are configured in the dbt_project.yml file.
+This project has been configured to use variables for the input/output databases and schemas. You can dynamically set the variables while running dbt commands.  The default variable names are configured in the dbt_project.yml file.
 
 Sample dbt command specifying new variable names:
 

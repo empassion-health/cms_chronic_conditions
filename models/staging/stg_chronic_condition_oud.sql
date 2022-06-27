@@ -3,13 +3,15 @@
 {%- set condition_filter = 'Opioid Use Disorder (OUD)' -%}
 
 {%- set naltrexone_ndcs = (
-    '00056001122', '00056001130', '00056001170', '00056007950', '00056008050', '00185003901',
-    '00185003930', '00406009201', '00406009203', '00406117001', '00406117003', '00555090201',
-    '00555090202', '00904703604', '16729008101', '16729008110', '42291063230', '43063059115',
-    '47335032683', '47335032688', '50090286600', '50436010501', '51224020630', '51224020650',
-    '51285027501', '51285027502', '52152010502', '52152010504', '52152010530', '54868557400',
-    '63459030042', '63629104601', '63629104701', '65694010003', '65694010010', '65757030001',
-    '65757030202', '68084029111', '68084029121', '68094085362', '68115068030'
+    '00056001122', '00056001130', '00056001170', '00056007950', '00056008050',
+    '00185003901', '00185003930', '00406009201', '00406009203', '00406117001',
+    '00406117003', '00555090201', '00555090202', '00904703604', '16729008101',
+    '16729008110', '42291063230', '43063059115', '47335032683', '47335032688',
+    '50090286600', '50436010501', '51224020630', '51224020650', '51285027501',
+    '51285027502', '52152010502', '52152010504', '52152010530', '54868557400',
+    '63459030042', '63629104601', '63629104701', '65694010003', '65694010010',
+    '65757030001', '65757030202', '68084029111', '68084029121', '68094085362',
+    '68115068030'
     )
 -%}
 
@@ -89,8 +91,11 @@ inclusions_procedure as (
 ),
 
 /*
-    Exclusion logic: Naltrexone NDCs are excluded if there is evidence of an alcohol or other drug use disorder where opioid DX is not present
-    This CTE excludes medication encounters with the exception codes for Naltrexone. Those encounters will be evaluated separately.
+    Exclusion logic: Naltrexone NDCs are excluded if there is evidence of an
+    alcohol or other drug use disorder where opioid DX is not present
+
+    This CTE excludes medication encounters with the exception codes for
+    Naltrexone. Those encounters will be evaluated separately.
 */
 inclusions_medication as (
     select
@@ -111,8 +116,11 @@ inclusions_medication as (
 ),
 
 /*
-    Exclusion logic: Naltrexone NDCs are excluded if there is evidence of an alcohol or other drug use disorder where opioid DX is not present
-    This CTE includes patients with evidence of the chronic conditions Alcohol Use Disorders or Drug Use Disorders.
+    Exclusion logic: Naltrexone NDCs are excluded if there is evidence of an
+    alcohol or other drug use disorder where opioid DX is not present
+
+    This CTE includes patients with evidence of the chronic conditions Alcohol
+    Use Disorders or Drug Use Disorders.
 */
 exclusions_other_chronic_conditions as (
 
@@ -126,9 +134,12 @@ exclusions_other_chronic_conditions as (
 ),
 
 /*
-    Exclusion logic: Naltrexone NDCs are excluded if there is evidence of an alcohol or other drug use disorder where opioid DX is not present
-    This CTE creates the exclusion list which consists of patients with medication encounters for Naltrexone having
-    Alcohol Use Disorder or Drug Use Disorder and missing the Opioid Use Disorder diagnosis codes.
+    Exclusion logic: Naltrexone NDCs are excluded if there is evidence of an
+    alcohol or other drug use disorder where opioid DX is not present
+
+    This CTE creates the exclusion list which consists of patients with
+    medication encounters for Naltrexone having Alcohol Use Disorder or Drug
+    Use Disorder and missing the Opioid Use Disorder diagnosis codes.
 */
 exclusions_medication as (
     select distinct
@@ -137,9 +148,11 @@ exclusions_medication as (
          inner join chronic_conditions
              on patient_medications.ndc = chronic_conditions.code
          inner join exclusions_other_chronic_conditions
-             on patient_medications.patient_id = exclusions_other_chronic_conditions.patient_id
+             on patient_medications.patient_id =
+                exclusions_other_chronic_conditions.patient_id
          left join inclusions_diagnosis
-             on patient_medications.patient_id = inclusions_diagnosis.patient_id
+             on patient_medications.patient_id =
+                inclusions_diagnosis.patient_id
     where chronic_conditions.inclusion_type = 'Include'
     and chronic_conditions.code_system = 'NDC'
     and chronic_conditions.code in {{ naltrexone_ndcs }}
@@ -160,9 +173,12 @@ inclusions_unioned as (
 select distinct
       cast(inclusions_unioned.patient_id as varchar(255)) as patient_id
     , cast(inclusions_unioned.encounter_id as varchar(255)) as encounter_id
-    , cast(inclusions_unioned.encounter_start_date as date) as encounter_start_date
-    , cast(inclusions_unioned.chronic_condition_type as varchar(255)) as chronic_condition_type
-    , cast(inclusions_unioned.condition_category as varchar(255)) as condition_category
+    , cast(inclusions_unioned.encounter_start_date as date)
+      as encounter_start_date
+    , cast(inclusions_unioned.chronic_condition_type as varchar(255))
+      as chronic_condition_type
+    , cast(inclusions_unioned.condition_category as varchar(255))
+      as condition_category
     , cast(inclusions_unioned.condition as varchar(255)) as condition
     , cast(inclusions_unioned.data_source as varchar(255)) as data_source
 from inclusions_unioned

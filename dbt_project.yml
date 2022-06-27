@@ -2,19 +2,35 @@ name: 'chronic_conditions'
 version: '1.0.0'
 config-version: 2
 
-profile: tuva                          # configuration required (your profile to connect dbt to your warehouse)
+profile: tuva                          # configuration required
+                                       # profile to connect dbt to your data
 
 vars:
-  chronic_conditions:
-    input_database: tuva               # configuration required (name of the database where sources feeding this project are stored - "tuva" by default)
-    input_schema: core                 # configuration required (name of the schema where sources feeding this project is stored - "core" by default)
-    output_database: tuva              # configuration required (name of the database where output of this project should be written - "tuva" by default)
-    output_schema: chronic_conditions  # configuration required (name of the schema where output of this project should be written - "chronic_conditions" by default)
-    source_name: core                  # configuration required (name describing the dataset feeding this project, must match name in source.yml - typically matches input schema name)
-    condition: "{{ source(var('source_name'),'condition') }}"
-    encounter: "{{ source(var('source_name'),'encounter') }}"
-    medication: "{{ source(var('source_name'),'medication') }}"
-    procedure: "{{ source(var('source_name'),'procedure') }}"
+  source_name: core                  # configuration required
+                                     # name describing the dataset feeding
+                                     # this project - typically matches input
+                                     # schema name
+
+  input_database: tuva               # configuration required
+                                     # name of the database where sources
+                                     # feeding this project are stored
+
+  input_schema: core                 # configuration required
+                                     # name of the schema where sources
+                                     # feeding this project is stored
+
+  output_database: tuva              # configuration required
+                                     # name of the database where output of
+                                     # this project should be written
+
+  output_schema: chronic_conditions  # configuration required
+                                     # name of the schema where output of this
+                                     # project should be written
+
+  condition: "{{ source(var('source_name'),'condition') }}"
+  encounter: "{{ source(var('source_name'),'encounter') }}"
+  medication: "{{ source(var('source_name'),'medication') }}"
+  procedure: "{{ source(var('source_name'),'procedure') }}"
 
 model-paths: ["models"]
 analysis-paths: ["analysis"]

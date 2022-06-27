@@ -26,8 +26,11 @@ patient_encounters as (
 ),
 
 /*
-    Exception logic: a claim with the diagnosis code R75 requires a second qualifying claim that is not R75 (a screening code)
-    This CTE excludes encounters with the exception code. Those encounters will be evaluated separately.
+    Exception logic: a claim with the diagnosis code R75 requires a second
+    qualifying claim that is not R75 (a screening code)
+
+    This CTE excludes encounters with the exception code. Those encounters
+    will be evaluated separately.
 */
 inclusions_diagnosis as (
 
@@ -67,8 +70,11 @@ inclusions_ms_drg as (
 ),
 
 /*
-    Exception logic: a claim with the diagnosis code R75 requires a second qualifying claim that is not R75 (a screening code)
-    This CTE includes encounters with the exception code only where that patient has another encounter that is not R75.
+    Exception logic: a claim with the diagnosis code R75 requires a second
+    qualifying claim that is not R75 (a screening code)
+
+    This CTE includes encounters with the exception code only where that
+    patient has another encounter that is not R75.
 */
 exception_diagnosis as (
 
@@ -104,9 +110,12 @@ inclusions_unioned as (
 select distinct
       cast(inclusions_unioned.patient_id as varchar(255)) as patient_id
     , cast(inclusions_unioned.encounter_id as varchar(255)) as encounter_id
-    , cast(inclusions_unioned.encounter_start_date as date) as encounter_start_date
-    , cast(inclusions_unioned.chronic_condition_type as varchar(255)) as chronic_condition_type
-    , cast(inclusions_unioned.condition_category as varchar(255)) as condition_category
+    , cast(inclusions_unioned.encounter_start_date as date)
+      as encounter_start_date
+    , cast(inclusions_unioned.chronic_condition_type as varchar(255))
+      as chronic_condition_type
+    , cast(inclusions_unioned.condition_category as varchar(255))
+      as condition_category
     , cast(inclusions_unioned.condition as varchar(255)) as condition
     , cast(inclusions_unioned.data_source as varchar(255)) as data_source
 from inclusions_unioned

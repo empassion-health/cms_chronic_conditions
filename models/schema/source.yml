@@ -1,12 +1,14 @@
 version: 2
 
 sources:
-  - name: core
+  - name: "{{ var('source_name') }}"
     database: "{{ var('input_database') }}"
     schema: "{{ var('input_schema') }}"
     tables:
       - name: condition
-        description: Info about complaints, problems, admit diagnoses, discharge diagnoses, etc.
+        description: > 
+          Info about complaints, problems, admit diagnoses,
+          discharge diagnoses, etc.
         columns:
           - name: encounter_id
             description: Unique ID for each visit.
@@ -15,19 +17,25 @@ sources:
             description: Date the condition was recorded.
 
           - name: code_type
-            description: Type of condition code (e.g. icd-9-cm | icd-10-cm | snomed-ct).
+            description: >
+              Type of condition code (e.g. icd-9-cm | icd-10-cm | snomed-ct).
 
           - name: code
             description: The actual condition code.
 
           - name: diagnosis_rank
-            description: The order of diagnosis codes (applies to discharge diagnoses only, 1 indicates primary discharge diagnosis).
+            description: >
+              The order of diagnosis codes (applies to discharge diagnoses only,
+              1 indicates primary discharge diagnosis).
 
           - name: data_source
-            description: Indicates the name of the source dataset (e.g. Medicare Claims).
+            description: >
+              Indicates the name of the source dataset (e.g. Medicare Claims).
 
       - name: encounter
-        description: Visit-level information for all different encounter types (1 record per visit).
+        description: >
+          Visit-level information for all different encounter types
+          (1 record per visit).
         columns:
           - name: encounter_id
             description: Unique ID for each visit.
@@ -39,10 +47,12 @@ sources:
             description: Start date for the encounter.
 
           - name: data_source
-            description: Indicates the name of the source dataset (e.g. Medicare Claims).
+            description: >
+              Indicates the name of the source dataset (e.g. Medicare Claims).
 
       - name: medication
-        description: Info about medication requests, administrations, and prescriptions.
+        description: >
+          Info about medication requests, administrations, and prescriptions.
         columns:
           - name: encounter_id
             description: Unique ID for each visit.
@@ -60,7 +70,8 @@ sources:
             description: NDC code associated with the medication.
 
           - name: data_source
-            description: Indicates the name of the source dataset (e.g. Medicare Claims).
+            description: >
+              Indicates the name of the source dataset (e.g. Medicare Claims).
 
       - name: procedure
         description: Info about procedures including cpt and icd-10-pcs.
@@ -72,13 +83,15 @@ sources:
             description: Date when the procedure was performed.
 
           - name: code_type
-            description: Indicates the type of procedure (e.g. cpt | icd-10-pcs).
+            description: >
+              Indicates the type of procedure (e.g. cpt | icd-10-pcs).
 
           - name: code
             description: Procedure code.
 
           - name: data_source
-            description: Indicates the name of the source dataset (e.g. Medicare Claims).
+            description: >
+              Indicates the name of the source dataset (e.g. Medicare Claims).
 
 seeds:
   - name: chronic_conditions

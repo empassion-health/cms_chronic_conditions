@@ -5,7 +5,9 @@ models:
       config:
         database: "{{ var('output_database') }}"
         schema: "{{ var('output_schema') }}"
-      description: This model pivots conditions on the patient level (i.e. one record per patient) with flags for each chronic condition.
+      description: >
+        This model pivots conditions on the patient level (i.e. one record per 
+        patient) with flags for each chronic condition.
 
       columns:
           - name: patient_id
@@ -131,7 +133,7 @@ models:
           - name: hip_pelvic_fracture
             description: chronic condition flag 1 or 0
 
-          - name: human_immunodeficiency_virus_and_or_acquired_immunodeficiency_syndrome_hiv_aids
+          - name: human_immunodeficiency_virus_and_or_acquired_immunodeficiency_syndrome_hiv_aids #noqa
             description: chronic condition flag 1 or 0
 
           - name: hyperlipidemia
@@ -155,7 +157,7 @@ models:
           - name: leukemias_and_lymphomas
             description: chronic condition flag 1 or 0
 
-          - name: liver_disease_cirrhosis_and_other_liver_conditions_except_viral_hepatitis
+          - name: liver_disease_cirrhosis_and_other_liver_conditions_except_viral_hepatitis #noqa
             description: chronic condition flag 1 or 0
 
           - name: migraine_and_chronic_headache
@@ -221,7 +223,7 @@ models:
           - name: sickle_cell_disease
             description: chronic condition flag 1 or 0
 
-          - name: spina_bifida_and_other_congenital_anomalies_of_the_nervous_system
+          - name: spina_bifida_and_other_congenital_anomalies_of_the_nervous_system #noqa
             description: chronic condition flag 1 or 0
 
           - name: spinal_cord_injury
@@ -233,7 +235,7 @@ models:
           - name: tobacco_use
             description: chronic condition flag 1 or 0
 
-          - name: traumatic_brain_injury_and_nonpsychotic_mental_disorders_due_to_brain_damage
+          - name: traumatic_brain_injury_and_nonpsychotic_mental_disorders_due_to_brain_damage #noqa
             description: chronic condition flag 1 or 0
 
           - name: viral_hepatitis_general
