@@ -31,6 +31,15 @@ Execute the following steps to load all seed files, build all data marts, and ru
     1. Navigate to the project directory in the command line
     2. Execute "dbt build" to create all tables/views in your data warehouse
 
+## Usage
+This project has been configured to use variables for the input and output databases/schemas. This allows you to dynamically set the source and destination while running the dbt commands.  The default variable names are configured in the dbt_project.yml file.
+
+Sample dbt command specifying new variable names:
+
+```
+dbt build --vars '{input_database: my_database, input_schema: my_input, output_database: my_other_database, output_schema: i_love_data}'
+```
+
 ## Contributions
 Don't see a model or specific metric you would have liked to be included? Notice any bugs when installing 
 and running the package? If so, we highly encourage and welcome contributions to this package! 

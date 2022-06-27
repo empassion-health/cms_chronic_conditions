@@ -2,6 +2,9 @@ version: 2
 
 models:
     - name: chronic_conditions_pivoted
+      config:
+        database: "{{ var('output_database') }}"
+        schema: "{{ var('output_schema') }}"
       description: This model pivots conditions on the patient level (i.e. one record per patient) with flags for each chronic condition.
 
       columns:

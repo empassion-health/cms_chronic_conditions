@@ -2,6 +2,9 @@ version: 2
 
 models:
     - name: chronic_conditions_unioned
+      config:
+        database: "{{ var('output_database') }}"
+        schema: "{{ var('output_schema') }}"
       description: This model unions condition flags from the 3 upstream stage models that calculate them.
 
       columns:

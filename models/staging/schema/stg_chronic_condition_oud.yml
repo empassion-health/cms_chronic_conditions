@@ -2,6 +2,9 @@ version: 2
 
 models:
     - name: stg_chronic_condition_oud
+      config:
+        database: "{{ var('output_database') }}"
+        schema: "{{ var('output_schema') }}"
       description: >
         This model contains logic for the chronic condition Opioid Use Disorder (OUD).
         This model maps ICD-10-CM diagnosis codes, ICD-10-PCS procedure codes, HCPCS codes, and NDC codes to the chronic condition.

@@ -2,17 +2,19 @@ name: 'chronic_conditions'
 version: '1.0.0'
 config-version: 2
 
-profile: tuva_snowflake         # configuration required (your profile to connect dbt to your seeds warehouse)
+profile: tuva                          # configuration required (your profile to connect dbt to your warehouse)
 
 vars:
-  source_database: tuva         # configuration required (name of the database where seeds feeding this project is stored - tuva by default)
-  source_schema: core           # configuration required (name of the schema where seeds feeding this project is stored - core by default)
-  source_name: core             # configuration required (name of describing the dataset feeding this project - typically matches schema name)
-
-  condition: "{{ source(var('source_name'),'condition') }}"
-  encounter: "{{ source(var('source_name'),'encounter') }}"
-  medication: "{{ source(var('source_name'),'medication') }}"
-  procedure: "{{ source(var('source_name'),'procedure') }}"
+  chronic_conditions:
+    input_database: tuva               # configuration required (name of the database where sources feeding this project are stored - "tuva" by default)
+    input_schema: core                 # configuration required (name of the schema where sources feeding this project is stored - "core" by default)
+    output_database: tuva              # configuration required (name of the database where output of this project should be written - "tuva" by default)
+    output_schema: chronic_conditions  # configuration required (name of the schema where output of this project should be written - "chronic_conditions" by default)
+    source_name: core                  # configuration required (name describing the dataset feeding this project, must match name in source.yml - typically matches input schema name)
+    condition: "{{ source(var('source_name'),'condition') }}"
+    encounter: "{{ source(var('source_name'),'encounter') }}"
+    medication: "{{ source(var('source_name'),'medication') }}"
+    procedure: "{{ source(var('source_name'),'procedure') }}"
 
 model-paths: ["models"]
 analysis-paths: ["analysis"]
@@ -25,14 +27,3 @@ target-path: "target"
 clean-targets:         
     - "target"
     - "dbt_modules"
-
-models:
-  chronic_conditions:
-    +database: tuva
-    +schema: chronic_conditions
-
-seeds:
-  chronic_conditions:
-    +database: tuva
-    +schema: terminology
-    +tags: terminology

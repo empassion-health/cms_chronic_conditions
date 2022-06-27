@@ -2,6 +2,8 @@ version: 2
 
 sources:
   - name: core
+    database: "{{ var('input_database') }}"
+    schema: "{{ var('input_schema') }}"
     tables:
       - name: condition
         description: Info about complaints, problems, admit diagnoses, discharge diagnoses, etc.
@@ -77,3 +79,10 @@ sources:
 
           - name: data_source
             description: Indicates the name of the source dataset (e.g. Medicare Claims).
+
+seeds:
+  - name: chronic_conditions
+    config:
+      database:  "{{ var('output_database') }}"
+      schema:  "{{ var('output_schema') }}"
+      tags: terminology
