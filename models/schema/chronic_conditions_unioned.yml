@@ -8,13 +8,20 @@ models:
       description: >
         This model unions condition flags from the 3 upstream stage models that
         calculate them.
+      tests:
+        - unique:
+            column_name: "(patient_id || encounter_id || condition)"
 
       columns:
           - name: patient_id
             description: Unique ID for the patient.
+            tests:
+              - not_null
 
           - name: encounter_id
             description: Unique ID for each encounter (visit).
+            tests:
+              - not_null
 
           - name: encounter_start_date
             description: The date the encounter began.
@@ -30,6 +37,8 @@ models:
 
           - name: condition
             description: The name of the chronic condition.
+            tests:
+              - not_null
 
           - name: data_source
             description: >
