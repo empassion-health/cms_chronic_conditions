@@ -1,0 +1,45 @@
+version: 2
+
+models:
+    - name: stg_chronic_condition_hiv_aids
+      config:
+        database: "{{ var('output_database') }}"
+        schema: "{{ var('output_schema') }}"
+      description: >
+        This model contains logic for the chronic condition Human
+        Immunodeficiency Virus and/or Acquired Immunodeficiency Syndrome
+        (HIV/AIDS). This model maps ICD-10-CM diagnosis codes and MS DRG
+        codes to the chronic condition.
+
+      columns:
+          - name: patient_id
+            description: Unique ID for the patient.
+            tests:
+              - not_null
+
+          - name: encounter_id
+            description: Unique ID for each encounter (visit).
+            tests:
+              - not_null
+
+          - name: encounter_start_date
+            description: The date the encounter began.
+
+          - name: chronic_condition_type
+            description: >
+              The type of chronic condition as defined by CMS. 
+              ('Common' or 'Other chronic or potentially disabling conditions')
+
+          - name: condition_category
+            description: The category of the condition (e.g. Other).
+
+          - name: condition
+            description: The name of the chronic condition.
+            tests:
+              - not_null
+              - accepted_values:
+                  values: [ 'Human Immunodeficiency Virus and/or Acquired Immunodeficiency Syndrome (HIV/AIDS)' ] #noqa
+
+          - name: data_source
+            description: >
+              Indicates the name of the source dataset (e.g. Medicare Claims).

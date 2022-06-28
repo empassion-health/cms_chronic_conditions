@@ -1,16 +1,16 @@
-[![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![dbt logo and version](https://img.shields.io/static/v1?logo=dbt&label=dbt-version&message=0.20.x&color=orange)
+[![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![dbt logo and version](https://img.shields.io/static/v1?logo=dbt&label=dbt-version&message=1.0.x&color=orange)
 
 # Chronic Conditions
 
 Check out the latest [DAG](https://tuva-health.github.io/chronic_conditions/#!/overview?g_v=1)
 
-Check out the [Tuva Project Google Sheet](https://docs.google.com/spreadsheets/d/1q6VBqGJ3PBW0vYD1wrsN5jmcP0cEXQNd3xTyTgtHlcU/edit#gid=0)
+Check out our [Docs](http://thetuvaproject.com/)
 
-Check out our [Docs](https://docs.tuvahealth.com/)
+This concept package creates patient-level chronic condition flags based on the definitions from the [CMS Chronic Conditions Warehouse (CCW)](https://www2.ccwdata.org/web/guest/condition-categories). The package identifies and flags 75 different chronic conditions grouped into 9 clinical categories. _Note: The logic implemented in this package is more broad and inclusive of claim types and dates than the CMS definition._
 
-This package creates patient-level chronic condition flags based on the definitions from the CMS Chronic Conditions Warehouse (CCW).  The package identifies and flags 69 different chronic conditions grouped into 9 clinical areas.
-
-There are two main output tables from this package: 1) a 'long' table with one record per patient-condition and 2) a 'wide' table with one record for patient and each condition as a separate column.
+There are two main output tables from this package:
+1) A "long" table with all qualifying encounters per patient-condition, and 
+2) A "wide" table with one record per patient and each condition flag as a separate column.
 
 ## Pre-requisites
 1. You have healthcare data (e.g. EHR, claims, lab, HIE, etc.) in a data warehouse
@@ -30,6 +30,15 @@ Execute the following steps to load all seed files, build all data marts, and ru
 5. Run project
     1. Navigate to the project directory in the command line
     2. Execute "dbt build" to create all tables/views in your data warehouse
+
+## Usage
+This project has been configured to use variables for the input/output databases and schemas. You can dynamically set the variables while running dbt commands.  The default variable names are configured in the dbt_project.yml file.
+
+Sample dbt command specifying new variable names:
+
+```
+dbt build --vars '{input_database: my_database, input_schema: my_input, output_database: my_other_database, output_schema: i_love_data}'
+```
 
 ## Contributions
 Don't see a model or specific metric you would have liked to be included? Notice any bugs when installing 

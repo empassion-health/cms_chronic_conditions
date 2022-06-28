@@ -1,9 +1,0 @@
-version: 2
-
-models:
-    - name: condition_pivot
-      description: A patient-level table (i.e. one record per patient) with flags for each chronic condition.
-
-
-                
-

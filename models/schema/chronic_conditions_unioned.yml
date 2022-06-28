@@ -1,0 +1,45 @@
+version: 2
+
+models:
+    - name: chronic_conditions_unioned
+      config:
+        database: "{{ var('output_database') }}"
+        schema: "{{ var('output_schema') }}"
+      description: >
+        This model unions condition flags from the 3 upstream stage models that
+        calculate them.
+      tests:
+        - unique:
+            column_name: "(patient_id || encounter_id || condition)"
+
+      columns:
+          - name: patient_id
+            description: Unique ID for the patient.
+            tests:
+              - not_null
+
+          - name: encounter_id
+            description: Unique ID for each encounter (visit).
+            tests:
+              - not_null
+
+          - name: encounter_start_date
+            description: The date the encounter began.
+
+          - name: chronic_condition_type
+            description: >
+              The type of chronic condition as defined by CMS. 
+              ('Common' or 'Other chronic or potentially disabling conditions')
+
+          - name: condition_category
+            description: >
+              The category of the condition (e.g. Cardiovascular Disease).
+
+          - name: condition
+            description: The name of the chronic condition.
+            tests:
+              - not_null
+
+          - name: data_source
+            description: >
+              Indicates the name of the source dataset (e.g. Medicare Claims).
