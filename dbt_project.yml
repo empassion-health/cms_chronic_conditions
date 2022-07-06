@@ -6,20 +6,20 @@ profile: tuva                          # configuration required
                                        # profile to connect dbt to your data
 
 vars:
-  source_name: synthetic_data        # configuration required
+  source_name: core                  # configuration required
                                      # name describing the dataset feeding
                                      # this project - typically matches input
                                      # schema name
 
-  input_database: txv_freebird_test  # configuration required
+  input_database: tuva               # configuration required
                                      # name of the database where sources
                                      # feeding this project are stored
 
-  input_schema: clinical             # configuration required
+  input_schema: core                 # configuration required
                                      # name of the schema where sources
                                      # feeding this project is stored
 
-  output_database: txv_freebird_test # configuration required
+  output_database: tuva              # configuration required
                                      # name of the database where output of
                                      # this project should be written
 
