@@ -2,8 +2,8 @@ name: 'chronic_conditions'
 version: '1.0.0'
 config-version: 2
 
-profile: tuva                          # configuration required
-                                       # profile to connect dbt to your data
+profile: tuva                        # configuration required
+                                     # profile to connect dbt to your data
 
 vars:
   source_name: core                  # configuration required
