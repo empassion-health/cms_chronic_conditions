@@ -17,7 +17,7 @@ patient_encounters as (
         , encounter.encounter_start_date
         , encounter.ms_drg
         , encounter.data_source
-        , condition.code as condition_code
+        , replace(condition.code,'.','') as condition_code
         , condition.code_type as condition_code_type
     from {{ var('encounter') }} as encounter
          left join {{ var('condition') }} as condition
