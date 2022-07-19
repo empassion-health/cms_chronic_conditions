@@ -13,8 +13,8 @@ There are two main output tables from this package:
 2) A "wide" table with one record per patient and each condition flag as a separate column.
 
 ## Pre-requisites
-1. You have healthcare data (e.g. EHR, claims, lab, HIE, etc.) in a data warehouse
-2. You have [dbt](https://www.getdbt.com/) installed and configured (i.e. connected to your data warehouse)
+1. You have healthcare data (e.g. EHR, claims, lab, HIE, etc.) in a data warehouse.
+2. You have [dbt](https://www.getdbt.com/) installed and configured (i.e. connected to your data warehouse).
 
 [Here](https://docs.getdbt.com/dbt-cli/installation) are instructions for installing dbt.
 
@@ -23,7 +23,7 @@ Execute the following steps to load all seed files, build all data marts, and ru
 
 1. [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) this repo to your local machine or environment
 2. This project will run automatically off of [Tuva Core](https://github.com/tuva-health/core).
-3. Alternatively, if you haven't installed Tuva Core you can directly map your data to the source schema described in [source.yml](models/source.yml)
+3. Alternatively, if you haven't installed Tuva Core you can directly map your data to the source schema described in [source.yml](models/source.yml). _Note: Some chronic condition logic requires medication data. This project includes built-in logic to generate an empty medication CTE when it runs if you do not have this data._
 4. Configure [dbt_project.yml](/dbt_project.yml)
     - profile: set to 'tuva' by default - change this to an active profile in the profile.yml file that connects to your data warehouse
     - vars: configure source_name, source database name, and source schema name

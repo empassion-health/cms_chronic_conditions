@@ -15,6 +15,19 @@
     )
 -%}
 
+{#
+    Not all data sources have medications the below code block will set the
+    variable table_exists using the get_relation macro
+#}
+
+{%- set source_relation = adapter.get_relation(
+      database=var("input_database"),
+      schema=var("input_schema"),
+      identifier="medication"
+    ) -%}
+
+{%- set table_exists=source_relation is not none -%}
+
 with chronic_conditions as (
 
     select * from {{ ref('chronic_conditions') }}
@@ -42,7 +55,13 @@ patient_encounters as (
 
 ),
 
+/*
+    This code block creates an empty medication CTE if one is not found
+    using the table_exists variable, otherwise it uses the actual table
+*/
 patient_medications as (
+
+    {% if table_exists %}
 
     select
           encounter_id
@@ -51,6 +70,18 @@ patient_medications as (
         , replace(ndc,'.','') as ndc
         , data_source
     from {{ var('medication') }}
+
+    {% else %}
+
+    select
+          null::varchar as encounter_id
+        , null::varchar as patient_id
+        , null::date as encounter_start_date
+        , null::varchar as ndc
+        , null::varchar as data_source
+    where false
+
+    {% endif %}
 
 ),
 
