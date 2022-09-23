@@ -10,10 +10,6 @@ Knowledge Base:
 - Check out the [methodology](https://thetuvaproject.com/docs/methodology/chronic-conditions) used for this data mart
 - Check out the [data model](https://thetuvaproject.com/docs/data-models/data-marts/chronic-conditions) used for this data mart
 
-There are two main output tables from this data mart:
-1. A "long" table with all qualifying encounters per patient-condition, and 
-2. A "wide" table with one record per patient and each condition flag is a separate column.
-
 ## Pre-requisites
 1. You have healthcare data (e.g. claims data) in a data warehouse (e.g. Snowflake)
 2. You have [dbt](https://www.getdbt.com/) installed and configured (i.e. connected to your data warehouse)
