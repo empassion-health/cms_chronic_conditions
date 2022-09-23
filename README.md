@@ -24,7 +24,7 @@ Complete the following steps to configure the data mart to run in your environme
 
 1. [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) this repo to your local machine or environment
 2. Configure [dbt_project.yml](/dbt_project.yml)
-    - Profile: set to 'tuva' by default - change this to an active profile in the profile.yml file that connects to your data warehouse 
+    - Profile: set to 'default' by default - change this to an active profile in the profile.yml file that connects to your data warehouse 
     - Fill in the following vars (variables):
       - source_name - description of the dataset feeding this project 
       - input_database - database where sources feeding this project are stored 
