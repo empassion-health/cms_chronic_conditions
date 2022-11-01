@@ -5,7 +5,7 @@ with chronic_conditions as (
     select distinct
           condition
         , condition_column_name
-    from {{ ref('chronic_conditions') }}
+    from {{ source('tuva_terminology','chronic_conditions') }}
 
 ),
 

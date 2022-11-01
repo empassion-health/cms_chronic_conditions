@@ -93,9 +93,8 @@ sources:
             description: >
               Indicates the name of the source dataset (e.g. Medicare Claims).
 
-seeds:
-  - name: chronic_conditions
-    config:
-      database:  "{{ var('output_database') }}"
-      schema:  "{{ var('output_schema') }}"
-      tags: terminology
+  - name: tuva_terminology
+    database: tuva                  # configuration required - insert name of terminology database
+    schema:  tuva_terminology       # configuration required - insert name of terminology schema
+    tables:
+      - name: chronic_conditions

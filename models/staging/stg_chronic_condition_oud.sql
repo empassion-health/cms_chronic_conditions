@@ -30,7 +30,7 @@
 
 with chronic_conditions as (
 
-    select * from {{ ref('chronic_conditions') }}
+    select * from {{ source('tuva_terminology','chronic_conditions') }}
     where condition = '{{ condition_filter }}'
 
 ),
