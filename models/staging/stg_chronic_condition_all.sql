@@ -12,7 +12,7 @@ patient_encounters as (
           encounter.patient_id
         , encounter.encounter_id
         , encounter.encounter_start_date
-        , encounter.ms_drg
+        , encounter.ms_drg_code
         , encounter.data_source
         , replace(condition.code,'.','') as condition_code
         , condition.code_type as condition_code_type
@@ -76,7 +76,7 @@ inclusions_ms_drg as (
         , chronic_conditions.condition
     from patient_encounters
          inner join chronic_conditions
-             on patient_encounters.ms_drg = chronic_conditions.code
+             on patient_encounters.ms_drg_code = chronic_conditions.code
     where chronic_conditions.inclusion_type = 'Include'
     and chronic_conditions.code_system = 'MS-DRG'
     and chronic_conditions.additional_logic = 'None'
