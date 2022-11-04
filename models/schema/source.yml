@@ -54,7 +54,7 @@ sources:
         description: >
           Info about medication requests, administrations, and prescriptions.
         columns:
-          - name: encounter_id
+          - name: claim_id
             description: Unique ID for each visit.
 
           - name: patient_id
@@ -94,7 +94,7 @@ sources:
               Indicates the name of the source dataset (e.g. Medicare Claims).
 
   - name: tuva_terminology
-    database: tuva                  # configuration required - insert name of terminology database
-    schema:  tuva_terminology       # configuration required - insert name of terminology schema
+    database: demo_aaron                  # configuration required - insert name of terminology database
+    schema:  terminology       # configuration required - insert name of terminology schema
     tables:
       - name: chronic_conditions

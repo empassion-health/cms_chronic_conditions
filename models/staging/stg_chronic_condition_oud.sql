@@ -41,7 +41,7 @@ patient_encounters as (
           encounter.patient_id
         , encounter.encounter_id
         , encounter.encounter_start_date
-        , encounter.ms_drg
+        , encounter.ms_drg_code
         , encounter.data_source
         , replace(condition.code,'.','') as condition_code
         , condition.code_type as condition_code_type
