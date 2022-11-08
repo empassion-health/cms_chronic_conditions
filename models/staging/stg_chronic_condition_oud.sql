@@ -67,7 +67,7 @@ patient_medications as (
           encounter_id
         , patient_id
         , coalesce(filled_date, paid_date) as encounter_start_date
-        , replace(ndc,'.','') as ndc
+        , replace(ndc_code,'.','') as ndc_code
         , data_source
     from {{ var('medication') }}
 
@@ -77,7 +77,7 @@ patient_medications as (
           null::varchar as encounter_id
         , null::varchar as patient_id
         , null::date as encounter_start_date
-        , null::varchar as ndc
+        , null::varchar as ndc_code
         , null::varchar as data_source
     where false
 
@@ -139,7 +139,7 @@ inclusions_medication as (
         , chronic_conditions.condition
     from patient_medications
          inner join chronic_conditions
-             on patient_medications.ndc = chronic_conditions.code
+             on patient_medications.ndc_code = chronic_conditions.code
     where chronic_conditions.inclusion_type = 'Include'
     and chronic_conditions.code_system = 'NDC'
     and chronic_conditions.code not in {{ naltrexone_ndcs }}
@@ -177,7 +177,7 @@ exclusions_medication as (
           patient_medications.patient_id
     from patient_medications
          inner join chronic_conditions
-             on patient_medications.ndc = chronic_conditions.code
+             on patient_medications.ndc_code = chronic_conditions.code
          inner join exclusions_other_chronic_conditions
              on patient_medications.patient_id =
                 exclusions_other_chronic_conditions.patient_id
