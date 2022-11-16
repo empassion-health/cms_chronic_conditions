@@ -1,11 +1,11 @@
-{{ config(materialized='table') }}
+{{ config(enabled = var('chronic_conditions_enabled',var('tuva_packages_enabled',True)) ) }}
 
 with chronic_conditions as (
 
     select distinct
           condition
         , condition_column_name
-    from {{ source('tuva_terminology','chronic_conditions') }}
+    from {{ ref('terminology__chronic_conditions') }}
 
 ),
 
@@ -15,7 +15,7 @@ conditions as (
           chronic_conditions_unioned.patient_id
         , chronic_conditions.condition_column_name
         , 1 as condition_count
-    from {{ ref('chronic_conditions_unioned') }} as chronic_conditions_unioned
+    from {{ ref('chronic_conditions__chronic_conditions_unioned') }} as chronic_conditions_unioned
          inner join chronic_conditions as chronic_conditions
              on chronic_conditions_unioned.condition =
                 chronic_conditions.condition
