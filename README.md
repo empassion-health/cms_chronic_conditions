@@ -1,49 +1,25 @@
-[![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![dbt logo and version](https://img.shields.io/static/v1?logo=dbt&label=dbt-version&message=1.x&color=orange)
-
+[![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![dbt logo and version](https://img.shields.io/static/v1?logo=dbt&label=dbt-version&message=1.2.x&color=orange)
 # Chronic Conditions
 
-This is the Tuva Project's Chronic Conditions data mart, which is a dbt project to create chronic condition flags on your patient population. It is based on the [CMS Chronic Conditions Warehouse (CCW) Methodology](https://www2.ccwdata.org/web/guest/condition-categories) and flags patients for 75 different chronic conditions grouped into 9 clinical categories.
+## 🧰 What does this project do?
 
-Check out the [DAG](https://tuva-health.github.io/chronic_conditions/#!/overview?g_v=1) for this data mart
+The Tuva Project's Chronic Conditions data mart creates chronic condition flags on your patient population for 75 different chronic conditions.  For a detailed overview of what the project does and how it works, check out our [Knowledge Base](https://thetuvaproject.com/docs/methodology/chronic-conditions).  For information on data models and to view the entire DAG check out our dbt Docs.
 
-Knowledge Base:
-- Check out the [methodology](https://thetuvaproject.com/docs/methodology/chronic-conditions) used for this data mart
-- Check out the [data model](https://thetuvaproject.com/docs/data-models/data-marts/chronic-conditions) used for this data mart
+## 🔌 Database Support
 
-## Pre-requisites
-1. You have healthcare data (e.g. claims data) in a data warehouse (e.g. Snowflake)
-2. You have [dbt](https://www.getdbt.com/) installed and configured (i.e. connected to your data warehouse)
-3. Your healthcare data is in the proper format to run the readmissions data mart:
-    - [Claims Preprocessing](https://github.com/tuva-health/claims_preprocessing_snowflake) will transform your claims data into the proper format
-    - Alternatively you can map your data to the source schema described in [source.yml](models/schema/source.yml)
-    
-[Here](https://docs.getdbt.com/dbt-cli/installation) are instructions for installing dbt.
+This package has been tested on **Snowflake** and **Redshift**.
 
-## Getting Started
-Complete the following steps to configure the data mart to run in your environment.
+## ✅ How to get started
 
-1. [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) this repo to your local machine or environment
-2. Configure [dbt_project.yml](/dbt_project.yml)
-    - Profile: set to 'default' by default - change this to an active profile in the profile.yml file that connects to your data warehouse 
-    - Fill in the following vars (variables):
-      - source_name - description of the dataset feeding this project 
-      - input_database - database where sources feeding this project are stored 
-      - input_schema - schema where sources feeding this project is stored 
-      - output_database - database where output of this project should be written. We suggest using the Tuva database but any database will work. 
-      - output_schema - name of the schema where output of this project should be written
-3. Execute `dbt build` to load seed files, run models, and perform tests.
+### Pre-requisites
 
-Alternatively you can execute the following code and skip step 2b and step 3.
-```
-dbt build --vars '{input_database: my_database, input_schema: my_input, output_database: my_other_database, output_schema: i_love_data}'
-```
+This package is dependent on other Tuva packages.  We strongly recommend using ‘The Tuva Project’ package for all the building blocks needed to establish a comprehensive analytics platform. Please review the ReadMe in ‘The Tuva Project’ package for a detailed walkthrough and setup.
 
-## Contributions
-Have an opinion on the mappings? Notice any bugs when installing and running the package? 
-If so, we highly encourage and welcome contributions!
+## 🙋🏻‍♀️ Contributions
 
-## Community
+Have an opinion on the mappings? Notice any bugs when installing and running the package?
+If so, we highly encourage and welcome feedback!
+
+## 🤝 Community
+
 Join our growing community of healthcare data practitioners on [Slack](https://join.slack.com/t/thetuvaproject/shared_invite/zt-16iz61187-G522Mc2WGA2mHF57e0il0Q)!
-
-## Database Support
-This package has been tested on Snowflake and Redshift.
