@@ -6,8 +6,6 @@
 
 The Tuva Project's CMS Chronic Conditions package creates chronic condition flags on your patient population for 75 different chronic conditions. 
 
-For a detailed overview of what the project does and how it works, check out our [Knowledge Base](https://thetuvaproject.com/docs/packages/chronic-conditions).  
-
 For information on data models and to view the entire DAG check out our dbt [Docs](https://tuva-health.github.io/cms_chronic_conditions/#!/overview/terminology).
 
 ## 🔌 What databases are supported?
