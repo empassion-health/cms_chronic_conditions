@@ -7,12 +7,9 @@
 - [Knowledge Base](https://thetuvaproject.com/docs/intro): Learn about claims data fundamentals and how to do claims data analytics
 <br/><br/>
 
-
 ## 🧰 What does this project do?
 
 The Tuva Project's CMS Chronic Conditions package creates chronic condition flags on your patient population for 75 different chronic conditions. 
-
-For information on data models and to view the entire DAG check out our dbt [Docs](https://tuva-health.github.io/the_tuva_project/#!/overview/cms_chronic_conditions).
 
 ## 🔌 What databases are supported?
 
@@ -24,75 +21,7 @@ This package requires you to have dbt installed and a functional dbt project run
 
 ## ✅ How do I use this dbt package?
 
-Below are the steps to run this individual dbt package.  To run all packages in The Tuva Project, please refer to this [README](https://github.com/tuva-health/the_tuva_project#readme).
-
-### Overview
-
-The Tuva Project is a collection of dbt packages that build healthcare concepts (measures, groupers, data quality tests) on top of your raw healthcare data. Each of these dbt packages expects you to have data in a certain format (specific tables with specific columns in them) and uses that as an input to then build healthcare concepts. To run any dbt package that is part of The Tuva Project, the basic idea is the same:
-
-1. You create the necessary input tables as models within your dbt project so that the Tuva package of interest can reference them using ref() functions.
-2. You import the Tuva package you are interested in and tell it where to find the relevant input tables as well as what database and schema to dump its output into.
-
-### **Step 1:**
-
-First you must create the necessary input tables as models within your dbt project so that the Tuva package of interest can reference them using ref() functions. To run this CMS Chronic Conditions package, you must create [these 4 tables](https://tuva-health.github.io/cms_chronic_conditions/#!/model/model.cms_chronic_conditions_input.condition) as models within your dbt project.
-
-### **Step 2:**
-
-Once you have created the necessary 4 input tables as models within your dbt project, the next step is to import the CMS Chronic Conditions dbt package and tell it where to find the relevant input tables as well as what database and schema to dump its output into. These things are done by editing 2 different files in your dbt project: `packages.yml` and `dbt_project.yml`. 
-
-To import the CMS Chronic Conditions package, you need to include the following in your `packages.yml`:
-
-```yaml
-packages:
-  - package: tuva-health/cms_chronic_conditions
-    version: 0.1.7
-```
-
-To tell the CMS Chronic Conditions package where to find the relevant input tables as well as what database and schema to dump its output into, you must add the following in your `dbt_project.yml:`
-
-```yaml
-vars:
-# These variables point to the 4 input tables you created 
-# in your dbt project. The CMS Chronic Conditions package will use
-# these 4 tables as input to build the CMS Chronic Condition flags.
-# If you named these 4 models anything other than 'patient',
-# 'encounter', 'condition', 'procedure', you must modify the
-# refs here:
-  core_patient_override:   "{{ref('patient')}}"
-  core_encounter_override: "{{ref('encounter')}}"
-  core_condition_override: "{{ref('condition')}}"
-  core_procedure_override: "{{ref('procedure')}}"
-
-# These variables name the database and schemas that the
-# output of the CMS Chronic Conditions package will be dumped into:
-  tuva_database:  tuva     # make sure this database exists in your data warehouse
-  cms_chronic_conditions_schema: cms_chronic_conditions
-  terminology_schema: terminology
-
-# By default, the CMS Chronic Conditions package will import all
-# Tuva Terminology files. If you are running the CMS Chronic Conditions
-# package alone, we recommend including these vars here
-# to import only the Tuva Terminology files relevant
-# for CMS Chronic Conditions:
-  tuva_packages_enabled: false	    
-  cms_chronic_conditions_enabled: true       
-
-# By default, dbt prefixes schema names with the target 
-# schema in your profile. We recommend including this 
-# here so that dbt does not prefix the 'cms_chronic_conditions' schema
-# with anything:
-dispatch:
-  - macro_namespace: dbt
-    search_order: [ 'cms_chronic_conditions', 'dbt']
-```
-
-After completing the above steps you’re ready to run your project.
-
-- Run dbt deps to install the package
-- Run dbt build to run the entire project
-
-You now have the CMS chronic condition tables in your database and are ready to do analytics!
+To run this package, please refer to the instructions in the Tuva Project [README](https://github.com/tuva-health/the_tuva_project#readme).
 
 ## 🙋🏻‍♀️ ****How is this package maintained and how do I contribute?****
 
